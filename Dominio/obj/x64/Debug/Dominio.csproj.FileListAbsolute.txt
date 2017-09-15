@@ -1,0 +1,6 @@
+C:\Users\Luiz Henrique SSD\source\repos\Fornecedor\Dominio\bin\x64\Debug\Dominio.dll
+C:\Users\Luiz Henrique SSD\source\repos\Fornecedor\Dominio\bin\x64\Debug\Dominio.pdb
+C:\Users\Luiz Henrique SSD\source\repos\Fornecedor\Dominio\obj\x64\Debug\Dominio.csprojResolveAssemblyReference.cache
+C:\Users\Luiz Henrique SSD\source\repos\Fornecedor\Dominio\obj\x64\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Luiz Henrique SSD\source\repos\Fornecedor\Dominio\obj\x64\Debug\Dominio.dll
+C:\Users\Luiz Henrique SSD\source\repos\Fornecedor\Dominio\obj\x64\Debug\Dominio.pdb
