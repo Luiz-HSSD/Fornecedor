@@ -73,6 +73,7 @@ namespace Web
 
                             forne.ID = Convert.ToInt32(Request.QueryString["del"]);
                             Commands["EXCLUIR"].Execute(forne);
+                            LabelErro.Text = Viewgenerico.Erro(Res.Msg);
                             Response.Redirect("Default.aspx");
                         }
 
@@ -93,7 +94,8 @@ namespace Web
         {
             forne.Nome = txtnome.Text;
             forne.CNPJ = txtcnpj.Text;
-            Commands["SALVAR"].Execute(forne);
+            Res = Commands["SALVAR"].Execute(forne);
+            LabelErro.Text = Viewgenerico.Erro(Res.Msg);
             txtcod.Text = "";
             txtnome.Text = "";
             txtcnpj.Text = "";
@@ -102,14 +104,18 @@ namespace Web
 
         protected void Alterar_for_Click(object sender, EventArgs e)
         {
+            if (!String.IsNullOrEmpty(txtcod.Text))
+            {
             forne.ID = Convert.ToInt32(txtcod.Text);
             forne.Nome = txtnome.Text;
             forne.CNPJ = txtcnpj.Text;
-            Commands["ALTERAR"].Execute(forne);
+            Res = Commands["ALTERAR"].Execute(forne);
+            LabelErro.Text = Viewgenerico.Erro(Res.Msg);
             txtcod.Text = "";
             txtnome.Text = "";
             txtcnpj.Text = "";
             Pesquisar();
+            }
         }
 
         protected void Cancelar_for_Click(object sender, EventArgs e)
@@ -117,6 +123,19 @@ namespace Web
             txtcod.Text = "";
             txtnome.Text = "";
             txtcnpj.Text = "";
+        }
+
+        protected void txtcnpj_TextChanged(object sender, EventArgs e)
+        {
+            switch (txtcnpj.Text.Length)
+            {
+                case 3:
+                    txtcnpj.Text = txtcnpj.Text.Substring(0, txtcnpj.Text.Length-1)+"."+ txtcnpj.Text.Substring(txtcnpj.Text.Length - 1);
+                        break;
+                default:
+                    break;
+
+            }
         }
     }
 }

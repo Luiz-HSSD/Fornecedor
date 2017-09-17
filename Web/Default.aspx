@@ -1,6 +1,13 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Web._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+                      <script src="Scripts/jquery-1.8.3.min.js" type="text/javascript"></script>
+                    <script src="Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+                    <script type="text/javascript" >
+                        jQuery(function ($) {
+                            $("#MainContent_txtcnpj").mask("99.999.999/9999-99");
+                        });
+                    </script>      
 <table border="1" class="auto-style1">
         <tr>
             <td colspan="5">
@@ -21,7 +28,7 @@
         <tr>
             <td colspan="2">CNPJ: </td>
             <td colspan="3">
-                        <asp:TextBox TextMode="SingleLine" MaxLength="14" ID="txtcnpj" runat="server"></asp:TextBox>
+                        <asp:TextBox TextMode="SingleLine" MaxLength="18" ID="txtcnpj" runat="server" OnPreRender="txtcnpj_TextChanged" OnChanged="txtcnpj_TextChanged"></asp:TextBox>
                 </td>
         </tr>
         <tr>
@@ -36,6 +43,7 @@
             </td>
         </tr>
     </table>
+            <asp:Label ID="LabelErro" runat="server" BackColor="Red" Font-Size="Medium"></asp:Label>
             <br />
       <div id="divTable" runat="server" style="padding:30px; width: 998px; height: 1px;">
       <table class="auto-style19">
@@ -52,4 +60,5 @@
       <asp:GridView runat="server" CssClass="display" ID="GridViewcat" EnableModelValidation="True" Width="204px" >
   <HeaderStyle Font-Bold="true" />
                     </asp:GridView >
+                <br />
 </asp:Content>

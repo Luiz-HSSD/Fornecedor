@@ -67,6 +67,15 @@ namespace Web {
         protected global::System.Web.UI.WebControls.Button cancelar_for;
         
         /// <summary>
+        /// Controle LabelErro.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelErro;
+        
+        /// <summary>
         /// Controle divTable.
         /// </summary>
         /// <remarks>

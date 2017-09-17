@@ -7,7 +7,7 @@ namespace Web.Command
     {
         public override Resultado Execute(EntidadeDominio entidade)
         {
-            return fachada.salvar(entidade);
+            return fachada.Salvar(entidade);
         }
     }
 }

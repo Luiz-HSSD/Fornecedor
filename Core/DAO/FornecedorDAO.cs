@@ -118,8 +118,9 @@ namespace Core.DAO
                     {
                         ID = Convert.ToInt32(vai["forne_id"]),
                         Nome = (vai["fornecedor_nome"].ToString()),
-                        CNPJ = (vai["cnpj"].ToString())
+                        CNPJ = (vai["cnpj"].ToString().Trim())
                     };
+                    p.CNPJ = p.CNPJ.Substring(0, 2) + "." + p.CNPJ.Substring(2, 3) + "." + p.CNPJ.Substring(5, 3) + "/" + p.CNPJ.Substring(8, 4) + "-" + p.CNPJ.Substring(12, 2);
                     entidades.Add(p);
                 }
                 connection.Close();

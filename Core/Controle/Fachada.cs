@@ -34,19 +34,33 @@ namespace Core.Controle
             /* Intânciando o Map de Regras de Negócio */
             rns = new Dictionary<string, Dictionary<string, List<IStrategy>>>();
             
-            parametro_excluir para_ex = new parametro_excluir();
+            Parametro_excluir para_ex = new Parametro_excluir();
+            ValidarCNPJ val_cnpj = new ValidarCNPJ();
+            Validar_Nome validar_Nome = new Validar_Nome();
             FornecedorDAO forneDAO = new FornecedorDAO();
             daos.Add(typeof(Fornecedor).Name, forneDAO);
-            List<IStrategy> rnsSalvarFornecedor = new List<IStrategy>();
-            List<IStrategy> rnsAlterarFornecedor = new List<IStrategy>();
-            List<IStrategy> rnsExcluirFornecedor = new List<IStrategy>();
-            rnsExcluirFornecedor.Add(para_ex);
+            List<IStrategy> rnsSalvarFornecedor = new List<IStrategy>()
+            {
+                validar_Nome,
+                val_cnpj
+            };
+            List<IStrategy> rnsAlterarFornecedor = new List<IStrategy>()
+            {
+                validar_Nome,
+                val_cnpj
+            };
+            List<IStrategy> rnsExcluirFornecedor = new List<IStrategy>
+            {
+                para_ex
+            };
             List<IStrategy> rnsConsultarFornecedor = new List<IStrategy>();
-            Dictionary<string, List<IStrategy>> rnsFornecedor = new Dictionary<string, List<IStrategy>>();
-            rnsFornecedor.Add("SALVAR", rnsSalvarFornecedor);
-            rnsFornecedor.Add("ALTERAR", rnsAlterarFornecedor);
-            rnsFornecedor.Add("EXCLUIR", rnsExcluirFornecedor);
-            rnsFornecedor.Add("CONSULTAR", rnsConsultarFornecedor);
+            Dictionary<string, List<IStrategy>> rnsFornecedor = new Dictionary<string, List<IStrategy>>
+            {
+                { "SALVAR", rnsSalvarFornecedor },
+                { "ALTERAR", rnsAlterarFornecedor },
+                { "EXCLUIR", rnsExcluirFornecedor },
+                { "CONSULTAR", rnsConsultarFornecedor }
+            };
             rns.Add(typeof(Fornecedor).Name, rnsFornecedor);
         }
         private static readonly Fachada Instance = new Fachada();
@@ -55,12 +69,12 @@ namespace Core.Controle
         {
             get { return Instance; }
         }
-        public Resultado salvar(EntidadeDominio entidade)
+        public Resultado Salvar(EntidadeDominio entidade)
         {
             resultado = new Resultado();
             string nmClasse = entidade.GetType().Name;
 
-            string msg = executarRegras(entidade, "SALVAR");
+            string msg = ExecutarRegras(entidade, "SALVAR");
 
 
             if (msg == null)
@@ -68,8 +82,10 @@ namespace Core.Controle
                 IDAO dao = daos[nmClasse];
 
                 dao.salvar(entidade);
-                List<EntidadeDominio> entidades = new List<EntidadeDominio>();
-                entidades.Add(entidade);
+                List<EntidadeDominio> entidades = new List<EntidadeDominio>
+                {
+                    entidade
+                };
                 resultado.Entidades=entidades;
 
             }
@@ -83,18 +99,20 @@ namespace Core.Controle
             return resultado;
         }
 
-        public Resultado alterar(EntidadeDominio entidade)
+        public Resultado Alterar(EntidadeDominio entidade)
         {
             resultado = new Resultado();
             string nmClasse = entidade.GetType().Name;
-            string msg = executarRegras(entidade, "ALTERAR");
+            string msg = ExecutarRegras(entidade, "ALTERAR");
 
             if (msg == null)
             {
                 IDAO dao = daos[nmClasse];
                 dao.alterar(entidade);
-                List<EntidadeDominio> entidades = new List<EntidadeDominio>();
-                entidades.Add(entidade);
+                List<EntidadeDominio> entidades = new List<EntidadeDominio>
+                {
+                    entidade
+                };
                 resultado.Entidades=entidades;
             }
             else
@@ -109,19 +127,21 @@ namespace Core.Controle
         }
 
 
-        public Resultado excluir(EntidadeDominio entidade)
+        public Resultado Excluir(EntidadeDominio entidade)
         {
             resultado = new Resultado();
             string nmClasse = entidade.GetType().Name;
-            string msg = executarRegras(entidade, "EXCLUIR");
+            string msg = ExecutarRegras(entidade, "EXCLUIR");
 
 
             if (msg == null)
             {
                 IDAO dao = daos[nmClasse];
                 dao.excluir(entidade);
-                List<EntidadeDominio> entidades = new List<EntidadeDominio>();
-                entidades.Add(entidade);
+                List<EntidadeDominio> entidades = new List<EntidadeDominio>
+                {
+                    entidade
+                };
                 resultado.Entidades=entidades;
             }
             else
@@ -133,11 +153,11 @@ namespace Core.Controle
 
         }
 
-        public Resultado consultar(EntidadeDominio entidade)
+        public Resultado Consultar(EntidadeDominio entidade)
         {
             resultado = new Resultado();
             string nmClasse = entidade.GetType().Name;
-            string msg = executarRegras(entidade, "CONSULTAR");
+            string msg = ExecutarRegras(entidade, "CONSULTAR");
 
 
             if (msg == null)
@@ -163,17 +183,19 @@ namespace Core.Controle
 
         }
 
-        public Resultado visualizar(EntidadeDominio entidade)
+        public Resultado Visualizar(EntidadeDominio entidade)
         {
-            resultado = new Resultado();
-            resultado.Entidades=new List<EntidadeDominio>(1);
+            resultado = new Resultado
+            {
+                Entidades = new List<EntidadeDominio>(1)
+            };
             resultado.Entidades.Add(entidade);
             return resultado;
 
         }
         
         
-        private string executarRegras(EntidadeDominio entidade, string operacao)
+        private string ExecutarRegras(EntidadeDominio entidade, string operacao)
         {
             string nmClasse = entidade.GetType().Name;
             StringBuilder msg = new StringBuilder();
@@ -189,9 +211,9 @@ namespace Core.Controle
                 {
                     foreach (IStrategy s in regras)
                     {
-                        string m = s.processar(entidade);
+                        string m = s.Processar(entidade);
 
-                        if (m != null)
+                        if (!String.IsNullOrEmpty(m))
                         {
                             msg.Append(m);
                             msg.Append("\n");

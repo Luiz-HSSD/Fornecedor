@@ -8,9 +8,9 @@ using Dominio;
 
 namespace Core.Negocio
 {
-    class parametro_excluir : IStrategy
+    class Parametro_excluir : Abstract_Regra_de_Negocios
     {
-        public string processar(EntidadeDominio entidade)
+        public override string Processar(EntidadeDominio entidade)
         {
             try
             {

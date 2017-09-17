@@ -61,7 +61,10 @@
     <Compile Include="Core\IStrategy.cs" />
     <Compile Include="DAO\AbstractDAO.cs" />
     <Compile Include="DAO\FornecedorDAO.cs" />
+    <Compile Include="Negocio\Abstract_Regra_de_Negocios.cs" />
     <Compile Include="Negocio\parametro_excluir.cs" />
+    <Compile Include="Negocio\Validar_Nome.cs" />
+    <Compile Include="Negocio\ValidarCNPJ.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Conexao.cs" />

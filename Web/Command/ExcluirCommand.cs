@@ -7,7 +7,7 @@ namespace Web.Command
     {
         public override Resultado Execute(EntidadeDominio entidade)
         {
-            return fachada.excluir(entidade);
+            return fachada.Excluir(entidade);
         }
     }
 }

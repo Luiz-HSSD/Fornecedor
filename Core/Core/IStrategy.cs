@@ -4,6 +4,6 @@ namespace Core.Core
 {
     interface IStrategy
     {
-         string processar(EntidadeDominio entidade);
+         string Processar(EntidadeDominio entidade);
     }
 }

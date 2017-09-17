@@ -5,11 +5,11 @@ namespace Core.Core
 {
     public interface IFachada
     {
-         Resultado salvar(EntidadeDominio entidade);
-         Resultado alterar(EntidadeDominio entidade);
-         Resultado excluir(EntidadeDominio entidade);
-         Resultado consultar(EntidadeDominio entidade);
-         Resultado visualizar(EntidadeDominio entidade);
+         Resultado Salvar(EntidadeDominio entidade);
+         Resultado Alterar(EntidadeDominio entidade);
+         Resultado Excluir(EntidadeDominio entidade);
+         Resultado Consultar(EntidadeDominio entidade);
+         Resultado Visualizar(EntidadeDominio entidade);
 
 
     }
